@@ -8,14 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var userName : String = ""
-    var userNameError : String = "Error"
-    @State var email : String = ""
-    var emailError : String = "Error"
-    @State var password : String = ""
-    var passwordError : String = "Error"
-    @State var ConfirmPassword : String = ""
-    var ConfirmPasswordError : String = "Error"
+    @ObservedObject  var viewModel = SignUpViewModel()
+    init (viewModel : SignUpViewModel){
+        self.viewModel = viewModel
+    }
     var body: some View {
         ZStack{
             Color.green.edgesIgnoringSafeArea(.all)
@@ -25,10 +21,10 @@ struct ContentView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 
-                CredentialsView(title: $userName, placeHolder: "User Name", errorText: userNameError)
-                CredentialsView(title: $email, placeHolder: "email", errorText: emailError, keyboardType: .emailAddress)
-                CredentialsView(title: $password, placeHolder: "password", errorText: emailError, isSecure: true)
-                CredentialsView(title: $ConfirmPassword, placeHolder: "confirm password", errorText: emailError, isSecure: true)
+                CredentialsView(title:$viewModel.userName , placeHolder: "User Name", errorText: viewModel.userNameError)
+                CredentialsView(title: $viewModel.email, placeHolder: "email", errorText: viewModel.emailError, keyboardType: .emailAddress)
+                CredentialsView(title: $viewModel.password, placeHolder: "password", errorText: viewModel.passwordError, isSecure: true)
+                CredentialsView(title: $viewModel.ConfirmPassword, placeHolder: "confirm password", errorText: viewModel.ConfirmPasswordError, isSecure: true)
                 
                 Button(" Sign up") {
                     print("hi")
@@ -48,7 +44,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    let viewModel = SignUpViewModel()
+    ContentView(viewModel: viewModel)
 }
 
 struct CredentialsView: View {

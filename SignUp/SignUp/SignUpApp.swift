@@ -10,8 +10,9 @@ import SwiftUI
 @main
 struct SignUpApp: App {
     var body: some Scene {
+        let viewModel = SignUpViewModel()
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
         }
     }
 }
