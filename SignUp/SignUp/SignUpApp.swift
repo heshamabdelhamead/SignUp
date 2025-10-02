@@ -12,7 +12,7 @@ struct SignUpApp: App {
     var body: some Scene {
         let viewModel = SignUpViewModel()
         WindowGroup {
-            ContentView(viewModel: viewModel)
+            SignUpView(viewModel: viewModel)
         }
     }
 }
